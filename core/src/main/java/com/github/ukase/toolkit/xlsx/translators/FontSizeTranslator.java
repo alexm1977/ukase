@@ -25,10 +25,6 @@ import org.xhtmlrenderer.css.constants.CSSName;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 import org.xhtmlrenderer.css.style.FSDerivedValue;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 @Component
 public class FontSizeTranslator implements Translator {
     @Override

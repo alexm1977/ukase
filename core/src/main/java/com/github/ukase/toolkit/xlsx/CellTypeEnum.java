@@ -19,31 +19,28 @@
 
 package com.github.ukase.toolkit.xlsx;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 
 @Getter
-public enum CellType {
-    STRING(Cell.CELL_TYPE_STRING, "string"),
-    NUMERIC(Cell.CELL_TYPE_NUMERIC, "numeric"),
-    DATE(Cell.CELL_TYPE_STRING, "date"),
-    DEFAULT(Cell.CELL_TYPE_BLANK, "common");
+@AllArgsConstructor
+public enum CellTypeEnum {
+    STRING("string", CellType.STRING),
+    NUMERIC("numeric", CellType.NUMERIC),
+    DATE("date", CellType.STRING),
+    DEFAULT("common", CellType.BLANK);
 
-    private int xssfType;
-    private String stringValue;
+    private final String stringValue;
+    private final CellType cellType;
 
-    CellType(int xssfType, String stringValue) {
-        this.xssfType = xssfType;
-        this.stringValue = stringValue;
-    }
-
-    public static CellType fromString(String type) {
+    public static CellTypeEnum fromString(String type) {
         if (type == null || type.isEmpty()) {
             return DEFAULT;
         }
-        for (CellType cellType: values()) {
-            if (cellType.stringValue.equals(type)) {
-                return cellType;
+        for (CellTypeEnum cellTypeEnum : values()) {
+            if (cellTypeEnum.stringValue.equals(type)) {
+                return cellTypeEnum;
             }
         }
         return DEFAULT;

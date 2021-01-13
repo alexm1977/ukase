@@ -25,13 +25,12 @@ import org.xhtmlrenderer.css.constants.CSSName;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 import org.xhtmlrenderer.css.style.FSDerivedValue;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @Component
 public class FontWeightTranslator implements Translator {
     private static final Collection<String> BOLD_VALUES;
+
     static {
         Collection<String> boldValues = new ArrayList<>();
         boldValues.add("bold");

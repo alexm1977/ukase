@@ -20,37 +20,22 @@
 package com.github.ukase.toolkit.pdf;
 
 import com.github.ukase.toolkit.CompoundSource;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;
-import org.w3c.dom.*;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.PdfWriter;
+import org.w3c.dom.Node;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 import org.xhtmlrenderer.extend.UserAgentCallback;
-import org.xhtmlrenderer.layout.BoxBuilder;
-import org.xhtmlrenderer.layout.Layer;
-import org.xhtmlrenderer.layout.LayoutContext;
-import org.xhtmlrenderer.layout.SharedContext;
-import org.xhtmlrenderer.pdf.ITextFontContext;
-import org.xhtmlrenderer.pdf.ITextOutputDevice;
-import org.xhtmlrenderer.pdf.ITextRenderer;
-import org.xhtmlrenderer.pdf.PDFEncryption;
-import org.xhtmlrenderer.render.BlockBox;
-import org.xhtmlrenderer.render.PageBox;
-import org.xhtmlrenderer.render.RenderingContext;
-import org.xhtmlrenderer.render.ViewportBox;
+import org.xhtmlrenderer.layout.*;
+import org.xhtmlrenderer.pdf.*;
+import org.xhtmlrenderer.render.*;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
-import java.awt.Rectangle;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.io.*;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class PdfSaucerRenderer extends ITextRenderer {
@@ -59,7 +44,7 @@ public class PdfSaucerRenderer extends ITextRenderer {
 
     private BlockBox root;
     private LayoutContext layoutContext;
-    private com.itextpdf.text.Document pdfDoc;
+    private com.lowagie.text.Document pdfDoc;
     private PdfWriter writer;
     private int minimalPagesCount;
 
@@ -96,14 +81,18 @@ public class PdfSaucerRenderer extends ITextRenderer {
     }
 
 
-    public void writeNextDocument(int initialPageNo) throws DocumentException, IOException {
+    public void writeNextDocument(int initialPageNo) throws DocumentException {
         java.util.List pages = root.getLayer().getPages();
 
         RenderingContext c = newRenderingContext();
         c.setInitialPageNo(initialPageNo);
         PageBox firstPage = (PageBox) pages.get(0);
-        com.itextpdf.text.Rectangle firstPageSize = new com.itextpdf.text.Rectangle(0, 0, firstPage.getWidth(c) / getDotsPerPoint(),
-                firstPage.getHeight(c) / getDotsPerPoint());
+        com.lowagie.text.Rectangle firstPageSize =
+                new com.lowagie.text.Rectangle(
+                        0,
+                        0,
+                        Math.round(firstPage.getWidth(c) / getDotsPerPoint()),
+                        Math.round(firstPage.getHeight(c) / getDotsPerPoint()));
 
         getOutputDevice().setStartPageNo(writer.getPageNumber());
 
@@ -113,16 +102,20 @@ public class PdfSaucerRenderer extends ITextRenderer {
         writePDF(pages, c, firstPageSize, pdfDoc, writer);
     }
 
-    public void createPDF(OutputStream os) throws DocumentException, IOException {
-        java.util.List pages = root.getLayer().getPages();
+    public void createPDF(OutputStream os) throws DocumentException {
+        List pages = root.getLayer().getPages();
 
         RenderingContext c = newRenderingContext();
         c.setInitialPageNo(0);
         PageBox firstPage = (PageBox) pages.get(0);
-        com.itextpdf.text.Rectangle firstPageSize = new com.itextpdf.text.Rectangle(0, 0, firstPage.getWidth(c) / getDotsPerPoint(),
-                firstPage.getHeight(c) / getDotsPerPoint());
+        com.lowagie.text.Rectangle firstPageSize =
+                new com.lowagie.text.Rectangle(
+                        0,
+                        0,
+                        Math.round(firstPage.getWidth(c) / getDotsPerPoint()),
+                        Math.round(firstPage.getHeight(c) / getDotsPerPoint()));
 
-        com.itextpdf.text.Document doc = new com.itextpdf.text.Document(firstPageSize, 0, 0, 0, 0);
+        Document doc = new Document(firstPageSize, 0, 0, 0, 0);
         writer = PdfWriter.getInstance(doc, os);
         writer.setPdfVersion(getPDFVersion());
         PDFEncryption pdfEncryption = getPDFEncryption();
@@ -146,8 +139,11 @@ public class PdfSaucerRenderer extends ITextRenderer {
         minimalPagesCount = resolveMinimalPagesCount(content);
     }
 
-    private void writePDF(java.util.List pages, RenderingContext c, com.itextpdf.text.Rectangle firstPageSize, com.itextpdf.text.Document doc,
-                          PdfWriter writer) throws DocumentException, IOException {
+    private void writePDF(List pages,
+                          RenderingContext c,
+                          com.lowagie.text.Rectangle firstPageSize,
+                          Document doc,
+                          PdfWriter writer) throws DocumentException {
         ITextOutputDevice outputDevice = getOutputDevice();
         outputDevice.setRoot(root);
 
@@ -169,8 +165,8 @@ public class PdfSaucerRenderer extends ITextRenderer {
             if (i != pageCount - 1) {
                 PageBox nextPage = (PageBox) pages.get(i + 1);
                 float dotsPerPoint = getDotsPerPoint();
-                com.itextpdf.text.Rectangle nextPageSize =
-                        new com.itextpdf.text.Rectangle(0, 0,
+                com.lowagie.text.Rectangle nextPageSize =
+                        new com.lowagie.text.Rectangle(0, 0,
                                 nextPage.getWidth(c) / dotsPerPoint, nextPage.getHeight(c) / dotsPerPoint);
                 doc.setPageSize(nextPageSize);
                 doc.newPage();
@@ -181,7 +177,7 @@ public class PdfSaucerRenderer extends ITextRenderer {
         outputDevice.finish(c, root);
     }
 
-    private void paintPage(RenderingContext c, PdfWriter writer, PageBox page) throws IOException {
+    private void paintPage(RenderingContext c, PdfWriter writer, PageBox page) {
         provideMetadataToPage(writer, page);
 
         page.paintBackground(c, 0, Layer.PAGED_MODE_PRINT);
@@ -223,7 +219,7 @@ public class PdfSaucerRenderer extends ITextRenderer {
         }
     }
 
-    private void provideMetadataToPage(PdfWriter writer, PageBox page) throws IOException {
+    private void provideMetadataToPage(PdfWriter writer, PageBox page) {
         byte[] metadata = null;
         if (page.getMetadata() != null) {
             try {
@@ -279,7 +275,7 @@ public class PdfSaucerRenderer extends ITextRenderer {
     }
 
 
-    private void setMetaValues(com.itextpdf.text.Document doc) {
+    private void setMetaValues(com.lowagie.text.Document doc) {
         setMeta(doc::addTitle, "title");
         setMeta(doc::addAuthor, "author");
         setMeta(doc::addSubject, "subject");
@@ -307,9 +303,8 @@ public class PdfSaucerRenderer extends ITextRenderer {
     }
 
 
-
     private void addEmptyPagesToCount(int count) {
-        for (int i = root.getLayer().getPages().size() ; i < count ; i++) {
+        for (int i = root.getLayer().getPages().size(); i < count; i++) {
             root.getLayer().addPage(layoutContext);
         }
     }

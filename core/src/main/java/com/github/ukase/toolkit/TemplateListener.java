@@ -19,8 +19,8 @@
 
 package com.github.ukase.toolkit;
 
-import java.util.function.Predicate;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public interface TemplateListener {
     void resourceUpdated(String resourceName);

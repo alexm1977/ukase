@@ -78,11 +78,12 @@ public class BulkConfig {
 
     /**
      * Set TTL (time to live) for rendered pdf bulks
+     *
      * @param ttl value in minutes
      */
     public void setTtl(long ttl) {
         this.ttl = ttl * 60 // minutes -> seconds
-                       * 1000; // seconds -> milliseconds
+                * 1000; // seconds -> milliseconds
     }
 
     public HttpStatus statusProcessed() {

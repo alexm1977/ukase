@@ -26,8 +26,9 @@ import org.xhtmlrenderer.css.constants.CSSName;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 import org.xhtmlrenderer.css.style.FSDerivedValue;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
 
 public class FontSizeTranslatorTest extends MockedTests {
     private final FontSizeTranslator translator = new FontSizeTranslator();
@@ -44,12 +45,12 @@ public class FontSizeTranslatorTest extends MockedTests {
 
     @Test
     public void test11pt() {
-        testPt((short)11);
+        testPt((short) 11);
     }
 
     @Test
     public void test14pt() {
-        testPt((short)14);
+        testPt((short) 14);
     }
 
     private void testPt(short size) {
@@ -60,7 +61,7 @@ public class FontSizeTranslatorTest extends MockedTests {
         CellStyleKey key = new CellStyleKey();
 
         translator.translateCssToXlsx(style, key);
-        assertEquals("Wrong translation", (long)key.getFontSize(), (long)size);
+        assertEquals("Wrong translation", (long) key.getFontSize(), (long) size);
     }
 
     private void testNull(FSDerivedValue value) {

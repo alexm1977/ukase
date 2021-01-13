@@ -19,9 +19,7 @@
 
 package com.github.ukase.toolkit.xlsx;
 
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 class CellMerge {
@@ -46,7 +44,7 @@ class CellMerge {
 
     void fillRow(Row row) {
         int rowNumber;
-        while((rowNumber = row.getPhysicalNumberOfCells()) <= cellEnd) {
+        while ((rowNumber = row.getPhysicalNumberOfCells()) <= cellEnd) {
             row.createCell(rowNumber)
                     .setCellStyle(style);
         }

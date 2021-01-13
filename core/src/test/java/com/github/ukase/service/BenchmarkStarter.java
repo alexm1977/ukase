@@ -25,9 +25,7 @@ import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.profile.GCProfiler;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
+import org.openjdk.jmh.runner.options.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,30 +35,37 @@ public class BenchmarkStarter {
     public void test512Html() throws RunnerException {
         runTest("512", HtmlRenderPerformanceTest.class);
     }
+
     @Test
     public void test512Pdf() throws RunnerException {
         runTest("512", PdfRenderPerformanceTest.class);
     }
+
     @Test
     public void test1024Html() throws RunnerException {
         runTest("1024", HtmlRenderPerformanceTest.class);
     }
+
     @Test
     public void test1024Pdf() throws RunnerException {
         runTest("1024", PdfRenderPerformanceTest.class);
     }
+
     @Test
     public void test1536Html() throws RunnerException {
         runTest("1536", HtmlRenderPerformanceTest.class);
     }
+
     @Test
     public void test1536Pdf() throws RunnerException {
         runTest("1536", PdfRenderPerformanceTest.class);
     }
+
     @Test
     public void test2048Html() throws RunnerException {
         runTest("2048", HtmlRenderPerformanceTest.class);
     }
+
     @Test
     public void test2048Pdf() throws RunnerException {
         runTest("2048", PdfRenderPerformanceTest.class);

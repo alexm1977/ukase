@@ -26,14 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,7 +46,7 @@ public class CompoundSource {
         sources = new ArrayList<>(3);
 
         Collection<String> fonts = new HashSet<>();
-        for(Source source: sources) {
+        for (Source source : sources) {
             fonts.addAll(source.getFontsUrls());
         }
         fonts.addAll(getDefaultFonts());
@@ -69,7 +62,7 @@ public class CompoundSource {
     }
 
     public boolean hasResource(String url) {
-        for (Source source: sources) {
+        for (Source source : sources) {
             if (source.hasResource(url)) {
                 return true;
             }
@@ -92,10 +85,19 @@ public class CompoundSource {
 
     private Collection<String> getDefaultFonts() {
         ClassLoader loader = getClass().getClassLoader();
-        return Stream.of("LiberationSerif-Regular.ttf",
-                  "LiberationSerif-Bold.ttf",
-                  "LiberationSerif-Italic.ttf",
-                  "LiberationSerif-BoldItalic.ttf")
+        return Stream.of(
+                "LiberationSans-Bold.ttf",
+                "LiberationSans-BoldItalic.ttf",
+                "LiberationSans-Italic.ttf",
+                "LiberationSans-Regular.ttf",
+                "LiberationSerif-Regular.ttf",
+                "LiberationSerif-Bold.ttf",
+                "LiberationSerif-Italic.ttf",
+                "LiberationSerif-BoldItalic.ttf",
+                "Roboto-Regular.ttf",
+                "Roboto-Bold.ttf",
+                "Roboto-Italic.ttf",
+                "Roboto-BoldItalic.ttf")
                 .map(loader::getResource)
                 .filter(Objects::nonNull)
                 .map(Object::toString)

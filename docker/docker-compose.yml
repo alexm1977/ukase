@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  ukase:
+    image: ukase
+    ports:
+      - "8080:10080"
+      - "5005:5005"
+      - "5006:5006"
+    volumes:
+      - ./config:/opt/app/config
+      - ./resources:/opt/app/resources
+      - ./templates:/opt/app/templates
+      - ./jars:/opt/app/jars
+      - ./pdfs:/opt/app/pdfs
+      - ./logs:/opt/app/logs
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+      - "JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006"
+      - "UKASE_RESOURCES=/opt/app/resources"
+      - "UKASE_TEMPLATES=/opt/app/templates"
+      - "UKASE_BULK_PATH=/opt/app/pdfs"
+      #      - "UKASE_JAR=/opt/app/jars"
+      - "LOGGING_CONFIG=/opt/app/config/logback-dev.xml"
+      - "LOGS=/opt/app/logs"

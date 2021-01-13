@@ -19,18 +19,13 @@
 
 package com.github.ukase.toolkit;
 
-import com.github.jknack.handlebars.io.AbstractTemplateLoader;
-import com.github.jknack.handlebars.io.StringTemplateSource;
-import com.github.jknack.handlebars.io.TemplateLoader;
-import com.github.jknack.handlebars.io.TemplateSource;
+import com.github.jknack.handlebars.io.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -61,8 +56,8 @@ public class CompoundTemplateLoader extends AbstractTemplateLoader {
             return IMAGE_AS_PAGE_TEMPLATE;
         }
 
-        for(TemplateLoader loader: templateLoaders) {
-            try  {
+        for (TemplateLoader loader : templateLoaders) {
+            try {
                 return loader.sourceAt(location);
             } catch (IOException e) {
                 //ignore

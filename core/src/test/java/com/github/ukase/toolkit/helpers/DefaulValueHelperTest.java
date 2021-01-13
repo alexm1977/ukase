@@ -1,8 +1,9 @@
 package com.github.ukase.toolkit.helpers;
 
 
-import com.github.jknack.handlebars.*;
-import org.junit.*;
+import com.github.jknack.handlebars.Helper;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -23,20 +24,20 @@ public class DefaulValueHelperTest extends BaseHelperTest {
 
     @Test
     public void defaultValueTest() throws IOException {
-        String result = (String) HELPER.apply(null, getOptions( null, DEFAULT_VALUE));
-        Assert.assertEquals( DEFAULT_VALUE, result);
+        String result = (String) HELPER.apply(null, getOptions(null, DEFAULT_VALUE));
+        Assert.assertEquals(DEFAULT_VALUE, result);
     }
 
     @Test
     public void originalValueTest() throws IOException {
-        String result = (String) HELPER.apply(VALUE, getOptions( VALUE, DEFAULT_VALUE));
-        Assert.assertEquals( VALUE, result);
+        String result = (String) HELPER.apply(VALUE, getOptions(VALUE, DEFAULT_VALUE));
+        Assert.assertEquals(VALUE, result);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void invalidParamsCountValueTest() throws IOException {
         String result = (String) HELPER.apply(null, getOptions(null));
-        Assert.assertEquals( VALUE, result);
+        Assert.assertEquals(VALUE, result);
     }
 
 

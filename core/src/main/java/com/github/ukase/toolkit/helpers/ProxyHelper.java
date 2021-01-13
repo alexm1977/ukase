@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * Helper is used as inner helper to extract variable from the context.
  */
 @Component
-public class ProxyHelper extends AbstractHelper<Object>  {
+public class ProxyHelper extends AbstractHelper<Object> {
     public ProxyHelper() {
         super("proxy");
     }

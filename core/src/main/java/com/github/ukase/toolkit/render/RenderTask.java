@@ -24,5 +24,6 @@ import java.util.concurrent.Callable;
 public interface RenderTask extends Callable<byte[]> {
     @Override
     byte[] call() throws RenderException;
+
     String getTemplateName();
 }

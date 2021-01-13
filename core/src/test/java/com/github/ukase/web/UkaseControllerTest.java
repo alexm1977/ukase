@@ -20,38 +20,20 @@
 package com.github.ukase.web;
 
 import com.github.ukase.TestHelper;
-
 import com.github.ukase.UkaseApplication;
-import com.github.ukase.config.BulkConfig;
-import com.github.ukase.config.UkaseSettings;
-import com.github.ukase.config.WaterMarkSettings;
-import com.github.ukase.config.WebConfig;
 import com.github.ukase.async.AsyncManager;
-import com.github.ukase.service.HtmlRenderer;
-import com.github.ukase.service.PdfRenderer;
-import com.github.ukase.service.PdfWatermarkRenderer;
-import com.github.ukase.service.XlsxRenderer;
-import com.github.ukase.toolkit.CompoundSource;
-import com.github.ukase.toolkit.CompoundTemplateLoader;
+import com.github.ukase.config.*;
+import com.github.ukase.service.*;
+import com.github.ukase.toolkit.*;
 import com.github.ukase.toolkit.fs.FSTemplateLoader;
+import com.github.ukase.toolkit.fs.FileSource;
+import com.github.ukase.toolkit.helpers.FormatNumberHelper;
+import com.github.ukase.toolkit.helpers.datetime.FormatDateHelper;
+import com.github.ukase.toolkit.jar.JarSource;
 import com.github.ukase.toolkit.jar.ZipTemplateLoader;
 import com.github.ukase.toolkit.render.RenderTaskBuilder;
-import com.github.ukase.toolkit.ResourceProvider;
-import com.github.ukase.toolkit.fs.FileSource;
-import com.github.ukase.toolkit.helpers.datetime.FormatDateHelper;
-import com.github.ukase.toolkit.helpers.FormatNumberHelper;
-import com.github.ukase.toolkit.jar.JarSource;
 import com.github.ukase.toolkit.xlsx.RenderingTableFactory;
-import com.github.ukase.toolkit.xlsx.translators.BackgroundColorTranslator;
-import com.github.ukase.toolkit.xlsx.translators.BorderBottomTranslator;
-import com.github.ukase.toolkit.xlsx.translators.BorderLeftTranslator;
-import com.github.ukase.toolkit.xlsx.translators.BorderRightTranslator;
-import com.github.ukase.toolkit.xlsx.translators.BorderTopTranslator;
-import com.github.ukase.toolkit.xlsx.translators.FontSizeTranslator;
-import com.github.ukase.toolkit.xlsx.translators.FontWeightTranslator;
-import com.github.ukase.toolkit.xlsx.translators.HorizontalAlignmentTranslator;
-import com.github.ukase.toolkit.xlsx.translators.VerticalAlignmentTranslator;
-import com.github.ukase.toolkit.xlsx.translators.WordWrapTranslator;
+import com.github.ukase.toolkit.xlsx.translators.*;
 import com.github.ukase.web.validation.HtmlTemplateLocationExistsValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,14 +49,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @ContextConfiguration(classes = {
         UkaseApplication.class,
         UkaseSettings.class,
-        WebConfig.class,
         WaterMarkSettings.class,
         BulkConfig.class,
         AsyncManager.class,
@@ -108,6 +89,7 @@ import static org.junit.Assert.*;
 @WebMvcTest(controllers = {UkaseController.class, UkaseExceptionHandler.class})
 public class UkaseControllerTest {
     private static final String payload;
+
     static {
         try {
             payload = TestHelper.getFileContent("basic-payload.json", UkaseControllerTest.class);
@@ -125,7 +107,7 @@ public class UkaseControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/html").content(payload).contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(basicHtml));
+                .andExpect(MockMvcResultMatchers.content().xml(basicHtml));
     }
 
     @Test
@@ -135,7 +117,7 @@ public class UkaseControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/html").content(wrongPayload).contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.content().string(wrongAnswer));
+                .andExpect(MockMvcResultMatchers.content().json(wrongAnswer));
     }
 
     @Test

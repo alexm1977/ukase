@@ -29,7 +29,7 @@ import org.xhtmlrenderer.css.constants.IdentValue;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 import org.xhtmlrenderer.css.style.FSDerivedValue;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class VerticalAlignmentTranslatorTest extends MockedTests {
     private final VerticalAlignmentTranslator translator = new VerticalAlignmentTranslator();

@@ -1,0 +1,14 @@
+server:
+  port: 8082
+
+ukase:
+  task-executor:
+    core-pool-size: 4
+    max-pool-size: 8
+  url: "http://localhost:8080/"
+  login:
+  password:
+
+example:
+  storage: "/home/alex/storage"
+

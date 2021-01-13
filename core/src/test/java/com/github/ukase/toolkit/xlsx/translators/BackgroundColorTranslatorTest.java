@@ -24,16 +24,14 @@ import com.github.ukase.toolkit.xlsx.MockedTests;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.xhtmlrenderer.css.constants.CSSName;
-import org.xhtmlrenderer.css.parser.FSCMYKColor;
-import org.xhtmlrenderer.css.parser.FSColor;
-import org.xhtmlrenderer.css.parser.FSRGBColor;
-import org.xhtmlrenderer.css.parser.PropertyValue;
+import org.xhtmlrenderer.css.parser.*;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 import org.xhtmlrenderer.css.style.derived.ColorValue;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-public class BackgroundColorTranslatorTest extends MockedTests{
+public class BackgroundColorTranslatorTest extends MockedTests {
     private final BackgroundColorTranslator translator = new BackgroundColorTranslator();
 
     @Test

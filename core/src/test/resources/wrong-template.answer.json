@@ -1,1 +1,7 @@
-[{"field":"index","object":"ukasePayload","message":"No such HTML template"}]
+[
+  {
+    "field": "index",
+    "object": "ukasePayload",
+    "message": "No such HTML template"
+  }
+]

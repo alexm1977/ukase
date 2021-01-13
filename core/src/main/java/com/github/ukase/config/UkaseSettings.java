@@ -24,9 +24,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.*;
 
 @Component
 @Data
@@ -74,7 +72,7 @@ public class UkaseSettings {
             if (!directory.isDirectory()) {
                 throw new IllegalStateException("Wrong configuration - not a directory/file: " + directory);
             }
-        } else if(!directory.isFile()) {
+        } else if (!directory.isFile()) {
             throw new IllegalStateException("Wrong configuration - not a jar file: " + directory);
         }
         return directory;

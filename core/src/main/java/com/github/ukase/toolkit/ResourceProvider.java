@@ -22,10 +22,11 @@ package com.github.ukase.toolkit;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.ukase.config.UkaseSettings;
 import com.github.ukase.toolkit.helpers.AbstractHelper;
+import com.github.ukase.toolkit.pdf.MediaReplacedElementFactory;
 import com.github.ukase.toolkit.pdf.PdfSaucerRenderer;
 import com.github.ukase.toolkit.render.RenderException;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.BaseFont;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.pdf.BaseFont;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -79,7 +80,7 @@ public class ResourceProvider {
         Handlebars engine = new Handlebars(templateLoader);
 
         source.getHelpers().forEach(engine::registerHelper);
-        for (AbstractHelper<?> helper: context.getBeansOfType(AbstractHelper.class).values()) {
+        for (AbstractHelper<?> helper : context.getBeansOfType(AbstractHelper.class).values()) {
             engine.registerHelper(helper.getName(), helper);
         }
 
@@ -92,6 +93,8 @@ public class ResourceProvider {
         try {
             initFonts(renderer.getFontResolver());
             htmlDocument = filterHtml5Document(htmlDocument);
+            renderer.getSharedContext()
+                    .setReplacedElementFactory(new MediaReplacedElementFactory(renderer.getSharedContext().getReplacedElementFactory()));
             renderer.setDocumentFromString(htmlDocument, resourcesPath);
             renderer.layout();
         } catch (IOException | DocumentException e) {
@@ -109,7 +112,7 @@ public class ResourceProvider {
     }
 
     private void initFonts(ITextFontResolver fontResolver) throws IOException, DocumentException {
-        for (String font: source.getFontsUrls()) {
+        for (String font : source.getFontsUrls()) {
             fontResolver.addFont(font, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         }
     }
@@ -175,7 +178,7 @@ public class ResourceProvider {
                 .append(":\n")
                 .append(getLine(htmlDocument, lineNumber))
                 .append("\n");
-        for (int i = 0 ; i < columnNumber - 1 ; i++) {
+        for (int i = 0; i < columnNumber - 1; i++) {
             sb.append(" ");
         }
         sb.append("^")

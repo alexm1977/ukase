@@ -28,7 +28,7 @@ import org.xhtmlrenderer.css.constants.CSSName;
 import org.xhtmlrenderer.css.constants.IdentValue;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class HorizontalAlignmentTranslatorTest extends MockedTests {
     private final HorizontalAlignmentTranslator translator = new HorizontalAlignmentTranslator();

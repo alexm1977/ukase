@@ -19,7 +19,8 @@
 
 package com.github.ukase.toolkit.xlsx;
 
-import org.hamcrest.core.IsNot;
+import org.mockito.internal.matchers.Equals;
+import org.mockito.internal.matchers.Not;
 import org.xhtmlrenderer.css.constants.CSSName;
 import org.xhtmlrenderer.css.parser.PropertyValue;
 import org.xhtmlrenderer.css.style.FSDerivedValue;
@@ -29,9 +30,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.*;
 
 public abstract class MockedTests {
     protected FSDerivedValue stringValue(String value, CSSName cssName) {
@@ -65,7 +64,7 @@ public abstract class MockedTests {
     }
 
     protected <T> T not(T object) {
-        return argThat(IsNot.not(object));
+        return (T) argThat(new Not(new Equals(object)));
     }
 
     private IllegalArgumentException exception(String message) {

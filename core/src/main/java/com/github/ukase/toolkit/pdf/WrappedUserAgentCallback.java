@@ -20,16 +20,14 @@
 package com.github.ukase.toolkit.pdf;
 
 import com.github.ukase.toolkit.CompoundSource;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StreamUtils;
 import org.xhtmlrenderer.extend.UserAgentCallback;
 import org.xhtmlrenderer.pdf.ITextFSImage;
-import org.xhtmlrenderer.resource.CSSResource;
-import org.xhtmlrenderer.resource.ImageResource;
-import org.xhtmlrenderer.resource.XMLResource;
+import org.xhtmlrenderer.resource.*;
 
 import java.io.IOException;
 import java.io.InputStream;

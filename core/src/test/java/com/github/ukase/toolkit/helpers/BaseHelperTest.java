@@ -8,12 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Test is used to test concreate helper
- *
+ * <p>
  * !!! Requires property ukase.enabled-sources.upload = true
  */
 @Slf4j
@@ -28,9 +29,8 @@ public class BaseHelperTest {
     private HtmlRenderer htmlRenderer;
 
     /**
-     *
-     * @param templateStr - string containing helper. Usecase {{helper param1 param2}}
-     * @param data - data to generate html
+     * @param templateStr    - string containing helper. Usecase {{helper param1 param2}}
+     * @param data           - data to generate html
      * @param resultContains - expected result into the generated html
      * @return - generated html
      * @throws IOException
@@ -38,10 +38,10 @@ public class BaseHelperTest {
     public String test(String templateStr, Map<String, Object> data, String resultContains) throws IOException {
         log.debug("data: {}, templateStr: {}", data, templateStr);
         byte[] template = templateStr.getBytes();
-        String templateName = loadTemplate( templateStr );
+        String templateName = loadTemplate(templateStr);
         String generatedHtml = generateHtml(data, template, templateName);
         log.debug("Generated html: {}", generatedHtml);
-        if( resultContains != null ) {
+        if (resultContains != null) {
             Assert.assertTrue("Generated html (" + generatedHtml + ") doesn't contain expectedResult: " +
                     resultContains, generatedHtml.contains(resultContains));
         }
@@ -77,7 +77,7 @@ public class BaseHelperTest {
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-class SingleValueContainer implements Serializable{
+class SingleValueContainer implements Serializable {
     private String value;
 }
 

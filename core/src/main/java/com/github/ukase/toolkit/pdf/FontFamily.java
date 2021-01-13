@@ -22,9 +22,7 @@ package com.github.ukase.toolkit.pdf;
 import org.xhtmlrenderer.css.constants.IdentValue;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 

@@ -25,22 +25,23 @@
 
     <groupId>com.github.ukase</groupId>
     <artifactId>ukase-parent</artifactId>
-    <version>6.5</version>
+    <version>6.9</version>
 
     <modules>
-        <module>ui</module>
+        <!--<module>ui</module>-->
         <module>core</module>
+        <module>example_template</module>
     </modules>
 
     <packaging>pom</packaging>
 
     <name>Ukase Root</name>
-    <url>https://github.com/ukase/ukase</url>
+    <url>https://github.com/alexm1977/ukase</url>
     <description>Pdf-generator service with ui for testing and evaluation of templates</description>
     <scm>
-        <url>https://github.com/ukase/ukase.git</url>
-        <connection>scm:git:git@github.com:ukase/ukase.git</connection>
-        <developerConnection>scm:git:git@github.com:ukase/ukase.git</developerConnection>
+        <url>https://github.com/alexm1977/ukase.git</url>
+        <connection>scm:git:git@github.com:alexm1977/ukase.git</connection>
+        <developerConnection>scm:git:git@github.com:alexm1977/ukase.git</developerConnection>
     </scm>
     <licenses>
         <license>
@@ -50,27 +51,40 @@
         </license>
     </licenses>
     <developers>
-        <developer><name>Konstantin Lepa</name><url>https://github.com/MadPitman</url></developer>
-        <developer><name>Pavel Uvarov</name><url>https://github.com/webkumo</url></developer>
+        <developer>
+            <name>Konstantin Lepa</name>
+            <url>https://github.com/MadPitman</url>
+        </developer>
+        <developer>
+            <name>Pavel Uvarov</name>
+            <url>https://github.com/webkumo</url>
+        </developer>
+        <developer>
+            <name>Aleksandr Mukhin</name>
+            <url>https://github.com/alexm1977</url>
+        </developer>
     </developers>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.2.RELEASE</version>
+        <version>2.3.7.RELEASE</version>
+        <relativePath/>
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
-        <lombok.version>1.16.6</lombok.version>
-        <handlebars.version>4.0.6</handlebars.version>
-        <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
-        <itextpdf.version>5.5.13</itextpdf.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
-        <junit.version>4.12</junit.version>
-        <flying-saucer.version>9.1.5</flying-saucer.version>
+        <jaxb.api.version>2.3.1</jaxb.api.version>
+
+        <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
+        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+        <handlebars.version>4.0.6</handlebars.version>
+        <itextpdf.version>5.5.13.1</itextpdf.version>
+        <flying-saucer.version>9.1.18</flying-saucer.version>
+
     </properties>
 
     <dependencyManagement>
@@ -80,17 +94,13 @@
                 <artifactId>ukase-ui</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${javax.servlet-api.version}</version>
-                <scope>provided</scope>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.api.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.github.jknack</groupId>
                 <artifactId>handlebars</artifactId>
@@ -101,11 +111,18 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
             </dependency>
+            <!--<dependency>
+                <groupId>com.github.librepdf</groupId>
+                <artifactId>openpdf</artifactId>
+                <version>1.3.24</version>
+            </dependency>-->
+
             <dependency>
                 <groupId>com.itextpdf</groupId>
                 <artifactId>itextpdf</artifactId>
                 <version>${itextpdf.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.xhtmlrenderer</groupId>
                 <artifactId>flying-saucer-pdf-itext5</artifactId>
@@ -115,15 +132,9 @@
             <dependency>
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
-                <version>3.3.0</version>
+                <version>3.4.0</version>
             </dependency>
 
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -19,27 +19,20 @@
 
 package com.github.ukase.toolkit.fs;
 
-import com.github.ukase.toolkit.TemplateListenable;
-import com.github.ukase.toolkit.TemplateListener;
 import com.github.ukase.config.UkaseSettings;
-import com.github.ukase.toolkit.Source;
+import com.github.ukase.toolkit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.io.*;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 @ConditionalOnProperty(name = {"ukase.enabled-sources.fs"}, havingValue = "true")
-public class FileSource implements Source, TemplateListenable {
+public class   FileSource implements Source, TemplateListenable {
     private final File resources;
     private final FileUpdatesListener resourcesListener;
 
@@ -81,8 +74,8 @@ public class FileSource implements Source, TemplateListenable {
             File[] fontsFiles = resources.listFiles((dir, fileName) -> IS_FONT.test(fileName));
             if (fontsFiles != null) {
                 return Arrays.stream(fontsFiles)
-                             .map(File::getAbsolutePath)
-                             .collect(Collectors.toList());
+                        .map(File::getAbsolutePath)
+                        .collect(Collectors.toList());
             }
         }
         return Collections.emptyList();

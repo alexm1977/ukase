@@ -31,12 +31,16 @@ public interface Source {
 
     Predicate<String> IS_FONT = fileName -> fileName.toLowerCase().endsWith("ttf");
     Predicate<String> IS_HELPERS_CONFIGURATION = fileName ->
-                    fileName.startsWith("imported-handlers") &&
+            fileName.startsWith("imported-handlers") &&
                     fileName.endsWith(".properties");
 
     boolean hasResource(String url);
+
     InputStream getResource(String url);
+
     int order();
 
-    default Collection<String> getFontsUrls() {return Collections.emptyList();}
+    default Collection<String> getFontsUrls() {
+        return Collections.emptyList();
+    }
 }

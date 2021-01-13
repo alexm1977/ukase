@@ -20,9 +20,7 @@
 package com.github.ukase.service;
 
 import com.github.ukase.config.UkaseSettings;
-import com.github.ukase.toolkit.CompoundSource;
-import com.github.ukase.toolkit.CompoundTemplateLoader;
-import com.github.ukase.toolkit.ResourceProvider;
+import com.github.ukase.toolkit.*;
 import com.github.ukase.toolkit.fs.FSTemplateLoader;
 import com.github.ukase.toolkit.fs.FileSource;
 import lombok.Getter;
@@ -32,11 +30,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 abstract class AbstractNoSpringBenchmark {
     @Getter
@@ -67,10 +61,14 @@ abstract class AbstractNoSpringBenchmark {
     private static class NoSpringApplicationContext extends AbstractApplicationContext {
         @Override
         protected void refreshBeanFactory() throws BeansException, IllegalStateException {/*do nothing*/}
+
         @Override
         protected void closeBeanFactory() {/*do nothing*/}
+
         @Override
-        public ConfigurableListableBeanFactory getBeanFactory() throws IllegalStateException {return null;}
+        public ConfigurableListableBeanFactory getBeanFactory() throws IllegalStateException {
+            return null;
+        }
 
         @Override
         public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
@@ -87,11 +85,11 @@ abstract class AbstractNoSpringBenchmark {
         List<Map<String, Object>> array = new ArrayList<>();
         data.put("array", array);
 
-        for(int i = 0 ; i < count ; i++) {
+        for (int i = 0; i < count; i++) {
             Map<String, Object> subData = new HashMap<>();
             array.add(subData);
 
-            for(int z = 1 ; z < columns ; z++) {
+            for (int z = 1; z < columns; z++) {
                 subData.put("f" + z, z + "аыфваф" + i);
             }
         }

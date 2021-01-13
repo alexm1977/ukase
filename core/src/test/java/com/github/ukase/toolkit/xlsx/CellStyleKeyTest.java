@@ -23,7 +23,7 @@ import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 public class CellStyleKeyTest extends MockedTests {
     @Test
@@ -59,6 +59,7 @@ public class CellStyleKeyTest extends MockedTests {
 
         cellStyleKey.applyToStyle(mockedStyle, null);
     }
+
     @Test
     public void testApplyToStyleBorders2() throws Exception {
         CellStyleKey cellStyleKey = new CellStyleKey();

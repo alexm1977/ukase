@@ -21,10 +21,7 @@ package com.github.ukase.toolkit;
 
 import lombok.extern.log4j.Log4j;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
@@ -34,7 +31,7 @@ public class StaticUtils {
         if (inputStream == null) {
             return null;
         }
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             return br.lines().collect(Collectors.joining("\n"));
         } catch (IOException e) {
             log.warn("Cannot read json file", e);

@@ -26,6 +26,7 @@ import java.io.IOException;
 
 /**
  * Abstract class as root class for conditional helpers to check some conditions inside if/unless helper
+ *
  * @author puvarov
  */
 abstract class ConditionalHelpers extends AbstractHelper<Object> {

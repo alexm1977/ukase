@@ -35,7 +35,7 @@ class ValidationError {
         object = error.getObjectName();
         message = error.getDefaultMessage();
         if (error instanceof FieldError) {
-            field = ((FieldError)error).getField();
+            field = ((FieldError) error).getField();
         } else {
             field = null;
         }

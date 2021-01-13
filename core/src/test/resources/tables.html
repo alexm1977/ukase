@@ -17,7 +17,8 @@
   ~  along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="ru" xml:lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:ukase="urn:ukase:xlsx">
 <head>
     <meta content="text/html"/>
@@ -27,50 +28,50 @@
     <link type="text/css" href="table-test.css" rel="stylesheet"/>
 </head>
 <body>
-    <table ukase:format-number="#,##0" ukase:format-currency="#,##0 руб.">
-        <tr>
-            <td ukase:data-type="string">-----</td>
-            <td ukase:data-type="numeric">-----</td>
-            <td ukase:data-type="numeric">
-            </td>
-        </tr>
-        <tr>
-            <td ukase:data-type="string">-----</td>
-            <td ukase:data-type="numeric">-----</td>
-            <td ukase:data-type="currency">
-                152315
-            </td>
-        </tr>
-        <tr>
-            <td ukase:data-type="date">
-                21.11.2023
-            </td>
-            <td>--+--</td>
-            <td ukase:data-type="numeric">1</td>
-        </tr>
-    </table>
-    <table id="special">
-        <caption>Табличко#special</caption>
-        <tr>
-            <th>Кол1</th>
-            <th>лок2</th>
-            <th>Ока3</th>
-            <th>123</th>
-        </tr>
-        <tr>
-            <td colspan="2" ukase:data-type="numeric">10000000001</td>
-            <td ukase:data-type="numeric">10002</td>
-            <td ukase:data-type="numeric">103</td>
-        </tr>
-        <tr>
-            <td rowspan="2">---+-</td>
-            <td colspan="2">--+--</td>
-            <td>203</td>
-        </tr>
-        <tr>
-            <td>--+--</td>
-            <td colspan="2">---+-</td>
-        </tr>
-    </table>
+<table ukase:format-number="#,##0" ukase:format-currency="#,##0 руб.">
+    <tr>
+        <td ukase:data-type="string">-----</td>
+        <td ukase:data-type="numeric">-----</td>
+        <td ukase:data-type="numeric">
+        </td>
+    </tr>
+    <tr>
+        <td ukase:data-type="string">-----</td>
+        <td ukase:data-type="numeric">-----</td>
+        <td ukase:data-type="currency">
+            152315
+        </td>
+    </tr>
+    <tr>
+        <td ukase:data-type="date">
+            21.11.2023
+        </td>
+        <td>--+--</td>
+        <td ukase:data-type="numeric">1</td>
+    </tr>
+</table>
+<table id="special">
+    <caption>Табличко#special</caption>
+    <tr>
+        <th>Кол1</th>
+        <th>лок2</th>
+        <th>Ока3</th>
+        <th>123</th>
+    </tr>
+    <tr>
+        <td colspan="2" ukase:data-type="numeric">10000000001</td>
+        <td ukase:data-type="numeric">10002</td>
+        <td ukase:data-type="numeric">103</td>
+    </tr>
+    <tr>
+        <td rowspan="2">---+-</td>
+        <td colspan="2">--+--</td>
+        <td>203</td>
+    </tr>
+    <tr>
+        <td>--+--</td>
+        <td colspan="2">---+-</td>
+    </tr>
+</table>
 </body>
 </html>

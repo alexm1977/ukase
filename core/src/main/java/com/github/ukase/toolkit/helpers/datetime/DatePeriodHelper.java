@@ -29,12 +29,11 @@ public class DatePeriodHelper extends AbstractHelper<Object> {
                 return "";
             }
 
-            LocalDateTime dateFrom = (( !StringUtils.isEmpty((String)context ))
-                    ? parseDateTime((String)context)
+            LocalDateTime dateFrom = ((!StringUtils.isEmpty((String) context))
+                    ? parseDateTime((String) context)
                     : OffsetDateTime.now()).toLocalDateTime();
             PeriodType periodType = PeriodType.valueOf(options.param(0));
             LocalDateTime dateTo = extractDateTimeOrCurrent(options, 1).toLocalDateTime();
-
 
 
             switch (periodType) {
@@ -98,11 +97,11 @@ public class DatePeriodHelper extends AbstractHelper<Object> {
     }
 
     private OffsetDateTime extractDateTimeOrCurrent(Options options, int index) {
-        if( options.params.length <= index) {
+        if (options.params.length <= index) {
             return OffsetDateTime.now();
         }
         String val = options.param(1);
-        if(StringUtils.isEmpty(val)) {
+        if (StringUtils.isEmpty(val)) {
             return OffsetDateTime.now();
         } else {
             return parseDateTime(val);

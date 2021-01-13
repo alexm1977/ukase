@@ -27,9 +27,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
+import java.time.format.*;
 import java.time.temporal.ChronoField;
 import java.util.regex.Pattern;
 
@@ -74,7 +72,7 @@ public class FormatDateHelper extends AbstractHelper<Object> {
         }
 
         if (context instanceof OffsetDateTime) {
-            return apply((OffsetDateTime)context, options);
+            return apply((OffsetDateTime) context, options);
         }
 
         return apply(options);

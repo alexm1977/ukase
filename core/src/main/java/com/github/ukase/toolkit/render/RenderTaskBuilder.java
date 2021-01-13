@@ -19,10 +19,7 @@
 
 package com.github.ukase.toolkit.render;
 
-import com.github.ukase.service.HtmlRenderer;
-import com.github.ukase.service.PdfRenderer;
-import com.github.ukase.service.PdfWatermarkRenderer;
-import com.github.ukase.service.XlsxRenderer;
+import com.github.ukase.service.*;
 import com.github.ukase.web.UkasePayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -21,10 +21,7 @@ package com.github.ukase.toolkit.helpers.barcode;
 
 import com.github.jknack.handlebars.Options;
 import com.github.ukase.toolkit.helpers.AbstractHelper;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.Writer;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.datamatrix.DataMatrixWriter;
 import com.google.zxing.oned.Code128Writer;
@@ -36,16 +33,16 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static com.github.ukase.toolkit.helpers.barcode.BarcodeCommons.*;
+import static com.github.ukase.toolkit.helpers.barcode.BarcodeCommons.bitMatrixToImage;
+import static com.github.ukase.toolkit.helpers.barcode.BarcodeCommons.convertData;
 
 @Component
 @Slf4j
 public class BarcodeHelper extends AbstractHelper<Object> {
     private static final Map<BarcodeFormat, Writer> WRITERS = new EnumMap<>(BarcodeFormat.class);
+
     static {
         WRITERS.put(BarcodeFormat.ITF, new ITFWriter());
         WRITERS.put(BarcodeFormat.QR_CODE, new QRCodeWriter());

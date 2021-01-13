@@ -30,12 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -67,7 +62,7 @@ public class JarSource implements Source {
         properties.forEach(this::registerHelper);
 
         if (hasHelpers()) {
-            URL[] jars = new URL[] {jar};
+            URL[] jars = new URL[]{jar};
             classLoader = new URLClassLoader(jars, getClass().getClassLoader());
             helpers.forEach((name, className) -> helpersInstances.put(name, getHelper(className)));
         } else {
@@ -93,8 +88,8 @@ public class JarSource implements Source {
     public Collection<String> getFontsUrls() {
         if (jar != null) {
             return templateLoader.getResources(IS_FONT).stream()
-                                 .map(font -> "jar:" + jar + "!/" + font)
-                                 .collect(Collectors.toList());
+                    .map(font -> "jar:" + jar + "!/" + font)
+                    .collect(Collectors.toList());
         }
         return Collections.emptyList();
     }

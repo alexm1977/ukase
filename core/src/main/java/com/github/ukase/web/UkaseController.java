@@ -23,18 +23,13 @@ import com.github.ukase.async.AsyncManager;
 import com.github.ukase.service.HtmlRenderer;
 import com.github.ukase.service.XlsxRenderer;
 import com.github.ukase.toolkit.TemplateListenable;
-import com.github.ukase.toolkit.render.RenderTaskBuilder;
 import com.github.ukase.toolkit.TemplateListener;
+import com.github.ukase.toolkit.render.RenderTaskBuilder;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -56,7 +51,8 @@ class UkaseController {
      ==============================================  State API controllers   =========================================
      =================================================================================================================*/
     @RequestMapping(value = "/pdf/{template}", method = RequestMethod.HEAD)
-    public @ResponseBody DeferredState checkTemplate(@PathVariable String template) {
+    public @ResponseBody
+    DeferredState checkTemplate(@PathVariable String template) {
         DeferredState state = new DeferredState();
         TemplateListener listener = TemplateListener.templateListener(template,
                 test -> state.setResult(translateState(test)));

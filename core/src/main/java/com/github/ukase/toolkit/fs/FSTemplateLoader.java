@@ -21,9 +21,7 @@ package com.github.ukase.toolkit.fs;
 
 import com.github.jknack.handlebars.io.FileTemplateLoader;
 import com.github.ukase.config.UkaseSettings;
-import com.github.ukase.toolkit.TemplateListenable;
-import com.github.ukase.toolkit.TemplateListener;
-import com.github.ukase.toolkit.UkaseTemplateLoader;
+import com.github.ukase.toolkit.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;

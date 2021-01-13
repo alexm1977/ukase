@@ -19,16 +19,15 @@
 
 package com.github.ukase.service;
 
-import com.github.ukase.toolkit.render.RenderException;
-import com.github.ukase.toolkit.pdf.PdfSaucerRenderer;
-import com.itextpdf.text.DocumentException;
 import com.github.ukase.toolkit.ResourceProvider;
+import com.github.ukase.toolkit.pdf.PdfSaucerRenderer;
+import com.github.ukase.toolkit.render.RenderException;
+import com.lowagie.text.DocumentException;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 @Service
 @Log4j
@@ -53,7 +52,7 @@ public class PdfRenderer implements Renderer<String, byte[]> {
 
             log.debug("pdf rendered");
             return baos.toByteArray();
-        } catch (IOException|DocumentException e) {
+        } catch (DocumentException e) {
             throw new RenderException("Cannot render pdf", e, "pdf");
         }
     }

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.time.*;
+import java.time.OffsetDateTime;
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiFunction;
 
 /**
  * Add specified date period @{@link PeriodType} to the specified date
@@ -38,19 +38,19 @@ public class AddPeriodHelper extends AbstractHelper<Object> {
     @Override
     public Object apply(Object context, Options options) throws IOException {
         try {
-            if (StringUtils.isEmpty((String)context)) {
+            if (StringUtils.isEmpty((String) context)) {
                 return "";
             }
 
-            if( options.params.length != 2 ) {
+            if (options.params.length != 2) {
                 log.error(MessageFormat.format(
                         "Incorrect count of input params ={0} (expected={1}, params={2}",
-                        options.params.length, 2, Arrays.toString(options.params) ) );
+                        options.params.length, 2, Arrays.toString(options.params)));
                 return "";
             }
 
 
-            OffsetDateTime date = parseDateTime((String)context);
+            OffsetDateTime date = parseDateTime((String) context);
             PeriodType periodType = PeriodType.valueOf(options.param(0));
             Integer period = options.param(1);
 

@@ -19,18 +19,13 @@
 
 package com.github.ukase.toolkit.upload;
 
-import com.github.ukase.toolkit.Source;
-import com.github.ukase.toolkit.TemplateListenable;
-import com.github.ukase.toolkit.TemplateListener;
+import com.github.ukase.toolkit.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Component

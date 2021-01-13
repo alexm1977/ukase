@@ -27,12 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.InputStream;
@@ -45,6 +40,7 @@ public class AsyncController {
     private static final String BULK_RESPONSE_READY;
     private static final String BULK_RESPONSE_PROCESSING;
     private static final String BULK_RESPONSE_ERROR;
+
     static {
         BULK_RESPONSE_READY = StaticUtils.readStringFile(getStream("bulk-response-ready.json"));
         BULK_RESPONSE_PROCESSING = StaticUtils.readStringFile(getStream("bulk-response-processing.json"));
@@ -61,19 +57,22 @@ public class AsyncController {
     }
 
     @RequestMapping(value = "/xlsx", method = RequestMethod.POST)
-    public @ResponseBody String startRenderXlsx(@RequestBody @Valid UkasePayload payload) {
+    public @ResponseBody
+    String startRenderXlsx(@RequestBody @Valid UkasePayload payload) {
         return asyncManager.putXlsxTaskInOrder(payload);
     }
 
     @RequestMapping(value = "/pdf", method = RequestMethod.POST,
             consumes = {"text/json", "text/json;charset=UTF-8", "application/json"})
-    public @ResponseBody String startRenderPdf(@RequestBody UkasePayload payload) {
+    public @ResponseBody
+    String startRenderPdf(@RequestBody UkasePayload payload) {
         return asyncManager.putPdfTaskInOrder(payload);
     }
 
     @RequestMapping(value = "/pdf/bulk", method = RequestMethod.POST,
             consumes = {"text/json", "text/json;charset=UTF-8", "application/json"})
-    public @ResponseBody String postBulkInOrder(@RequestBody List<UkasePayload> payloads) {
+    public @ResponseBody
+    String postBulkInOrder(@RequestBody List<UkasePayload> payloads) {
         return asyncManager.putBulkInOrder(payloads);
     }
 

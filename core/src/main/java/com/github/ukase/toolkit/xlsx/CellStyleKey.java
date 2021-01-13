@@ -21,16 +21,14 @@ package com.github.ukase.toolkit.xlsx;
 
 import lombok.Data;
 import lombok.NonNull;
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 import org.xhtmlrenderer.css.parser.FSColor;
 import org.xhtmlrenderer.css.parser.FSRGBColor;
 
 import java.util.function.Supplier;
+
+import static org.apache.poi.ss.usermodel.FillPatternType.SOLID_FOREGROUND;
 
 @Data
 public class CellStyleKey {
@@ -65,12 +63,12 @@ public class CellStyleKey {
         if (backgroundColor instanceof FSRGBColor) {
             FSRGBColor rgbColor = (FSRGBColor) backgroundColor;
             byte[] colors = new byte[3];
-            colors[0] = (byte)rgbColor.getRed();
-            colors[1] = (byte)rgbColor.getGreen();
-            colors[2] = (byte)rgbColor.getBlue();
+            colors[0] = (byte) rgbColor.getRed();
+            colors[1] = (byte) rgbColor.getGreen();
+            colors[2] = (byte) rgbColor.getBlue();
 
-            XSSFColor xlsxColor = new XSSFColor(colors);
-            style.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
+            XSSFColor xlsxColor = new XSSFColor(colors, new DefaultIndexedColorMap());
+            style.setFillPattern(SOLID_FOREGROUND);
             style.setFillForegroundColor(xlsxColor);
         }
     }

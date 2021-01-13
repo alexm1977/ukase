@@ -32,7 +32,7 @@ public class AddPeriodHelperTest extends BaseHelperTest {
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime expectedResult = now.plusMonths(monthes);
         test("{{add_period data.value 'month' 33}}",
-                createDataInDataContianer( OffsetDateTime.now() ),
+                createDataInDataContianer(now),
                 expectedResult.toString()
         );
     }
@@ -43,7 +43,7 @@ public class AddPeriodHelperTest extends BaseHelperTest {
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime expectedResult = now.plusDays(days);
         test("{{add_period data.value 'day' 33}}",
-                createDataInDataContianer( OffsetDateTime.now() ),
+                createDataInDataContianer(now),
                 expectedResult.toString()
         );
     }
@@ -54,7 +54,7 @@ public class AddPeriodHelperTest extends BaseHelperTest {
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime expectedResult = now.minusDays(days);
         test("{{add_period data.value 'day' -33}}",
-                createDataInDataContianer( OffsetDateTime.now() ),
+                createDataInDataContianer(now),
                 expectedResult.toString()
         );
     }
@@ -65,7 +65,7 @@ public class AddPeriodHelperTest extends BaseHelperTest {
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime expectedResult = now.plusHours(hours);
         test("{{add_period data.value 'hour' 33}}",
-                createDataInDataContianer( OffsetDateTime.now() ),
+                createDataInDataContianer(now),
                 expectedResult.toString()
         );
     }
@@ -76,7 +76,7 @@ public class AddPeriodHelperTest extends BaseHelperTest {
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime expectedResult = now.plusMinutes(minutes);
         test("{{add_period data.value 'min' 150}}",
-                createDataInDataContianer( OffsetDateTime.now() ),
+                createDataInDataContianer(now),
                 expectedResult.toString()
         );
     }
@@ -87,7 +87,7 @@ public class AddPeriodHelperTest extends BaseHelperTest {
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime expectedResult = now.plusSeconds(seconds);
         test("{{add_period data.value 'sec' 150}}",
-                createDataInDataContianer( OffsetDateTime.now() ),
+                createDataInDataContianer(now),
                 expectedResult.toString()
         );
     }

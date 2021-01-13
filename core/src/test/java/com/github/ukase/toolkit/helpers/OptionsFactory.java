@@ -2,7 +2,8 @@ package com.github.ukase.toolkit.helpers;
 
 import com.github.jknack.handlebars.*;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class OptionsFactory {
 

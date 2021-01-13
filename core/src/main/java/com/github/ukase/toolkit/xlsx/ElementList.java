@@ -22,10 +22,7 @@ package com.github.ukase.toolkit.xlsx;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -62,7 +59,7 @@ public class ElementList implements List<Element> {
     @Override
     public Object[] toArray() {
         Object[] arr = new Object[size()];
-        for (int i = 0 ; i < size() ; i++) {
+        for (int i = 0; i < size(); i++) {
             arr[i] = get(i);
         }
         return arr;
@@ -85,7 +82,7 @@ public class ElementList implements List<Element> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        for (Object o: c) {
+        for (Object o : c) {
             if (!contains(o)) {
                 return false;
             }
@@ -143,7 +140,7 @@ public class ElementList implements List<Element> {
         if (o == null || !(o instanceof Element)) {
             return -1;
         }
-        for (int i = 0 ; i < size() ; i++) {
+        for (int i = 0; i < size(); i++) {
             if (o.equals(get(i))) {
                 return i;
             }
@@ -156,7 +153,7 @@ public class ElementList implements List<Element> {
         if (o == null || !(o instanceof Element)) {
             return -1;
         }
-        for (int i = size() - 1 ; i >= 0 ; i--) {
+        for (int i = size() - 1; i >= 0; i--) {
             if (o.equals(get(i))) {
                 return i;
             }
@@ -199,7 +196,7 @@ public class ElementList implements List<Element> {
 
         @Override
         public void forEachRemaining(Consumer<? super Element> action) {
-            while(hasNext()) {
+            while (hasNext()) {
                 action.accept(next());
             }
         }

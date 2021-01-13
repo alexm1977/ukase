@@ -50,6 +50,6 @@ public class EqualsHelper extends ConditionalHelpers {
         if (context == null) {
             return parameter == null;
         }
-        return parameter!= null && parameter.equals(context);
+        return parameter != null && parameter.equals(context);
     }
 }

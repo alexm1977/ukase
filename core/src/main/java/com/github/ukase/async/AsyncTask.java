@@ -23,6 +23,8 @@ import java.util.concurrent.ExecutorService;
 
 public interface AsyncTask {
     String getId();
+
     byte[] getResult() throws InterruptedException;
+
     AsyncTask startOnExecutor(ExecutorService service);
 }

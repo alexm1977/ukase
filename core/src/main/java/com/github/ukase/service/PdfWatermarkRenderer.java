@@ -20,21 +20,15 @@
 package com.github.ukase.service;
 
 import com.github.ukase.config.WaterMarkSettings;
-import com.github.ukase.toolkit.render.RenderException;
 import com.github.ukase.toolkit.ResourceProvider;
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.ColumnText;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
+import com.github.ukase.toolkit.render.RenderException;
+import com.lowagie.text.Font;
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -48,7 +42,7 @@ public class PdfWatermarkRenderer implements Renderer<byte[], byte[]> {
             throws IOException, DocumentException {
         this.waterMark = waterMark;
         BaseFont baseFont = BaseFont.createFont(provider.getDefaultFont(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        this.font = new Font(baseFont, waterMark.getSize(), 0, BaseColor.LIGHT_GRAY);
+        this.font = new Font(baseFont, waterMark.getSize(), 0, Color.LIGHT_GRAY);
     }
 
     @Override
@@ -69,8 +63,8 @@ public class PdfWatermarkRenderer implements Renderer<byte[], byte[]> {
             stamper.close();
             reader.close();
             return baos.toByteArray();
-        } catch (IOException|DocumentException e) {
-            throw new RenderException("Cannot add watermark" , e, "watermark");
+        } catch (IOException | DocumentException e) {
+            throw new RenderException("Cannot add watermark", e, "watermark");
         }
     }
 }

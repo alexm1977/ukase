@@ -21,9 +21,7 @@ package com.github.ukase.toolkit.upload;
 
 import com.github.jknack.handlebars.io.AbstractTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateSource;
-import com.github.ukase.toolkit.TemplateListenable;
-import com.github.ukase.toolkit.TemplateListener;
-import com.github.ukase.toolkit.UkaseTemplateLoader;
+import com.github.ukase.toolkit.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 

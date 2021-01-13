@@ -19,9 +19,7 @@
 
 package com.github.ukase.toolkit.helpers;
 
-import com.github.jknack.handlebars.Context;
-import com.github.jknack.handlebars.Options;
-import com.github.jknack.handlebars.TagType;
+import com.github.jknack.handlebars.*;
 import com.github.ukase.config.properties.FormatDateProperties;
 import com.github.ukase.toolkit.helpers.datetime.FormatDateHelper;
 import org.junit.Test;
@@ -30,16 +28,19 @@ import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class FormatDateHelperTest {
     private static final FormatDateProperties PROPERTIES = new FormatDateProperties();
+
     static {
         PROPERTIES.setDatePattern("^\\d+.\\d+.\\d+( \\d+:\\d+$)?");
         PROPERTIES.setParseFormat("dd.MM.yyyy[ HH:mm]");
         PROPERTIES.setDisablePatterns(false);
         PROPERTIES.setFormatDate("dd.MM.yyyy");
     }
+
     private static final FormatDateHelper HELPER = new FormatDateHelper(PROPERTIES);
     private static final String REASON_WRONG = "Wrong render";
     private static final Long LONG_DATE = 12312612341234L;

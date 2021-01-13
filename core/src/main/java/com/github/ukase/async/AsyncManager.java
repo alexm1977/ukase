@@ -30,12 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.ExecutorService;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -110,7 +106,7 @@ public class AsyncManager {
             if (files != null && files.length == 0) {
                 log.info(subDir.getName() +
                         " removing... " +
-                        (subDir.delete() ? "success" : "failed") );
+                        (subDir.delete() ? "success" : "failed"));
             }
         }
     }
@@ -205,6 +201,7 @@ public class AsyncManager {
         request.setDataFile(getDataFile(request.getUuid()));
         return request;
     }
+
     private String nextUUID() {
         return UUID.randomUUID().toString();
     }

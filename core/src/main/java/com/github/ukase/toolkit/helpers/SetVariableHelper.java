@@ -62,7 +62,7 @@ public class SetVariableHelper extends AbstractHelper<Object> {
     private Map<String, Object> getContext(Options options) {
         Object possibleContext = options.context.model();
         if (possibleContext instanceof Map) {
-            return (Map<String, Object>)possibleContext;
+            return (Map<String, Object>) possibleContext;
         }
         return null;
     }

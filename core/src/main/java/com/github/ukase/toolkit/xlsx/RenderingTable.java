@@ -20,12 +20,7 @@
 package com.github.ukase.toolkit.xlsx;
 
 import com.github.ukase.toolkit.xlsx.translators.Translator;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DataFormat;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -35,13 +30,12 @@ import org.xhtmlrenderer.newtable.TableCellBox;
 import org.xhtmlrenderer.newtable.TableRowBox;
 import org.xhtmlrenderer.render.BlockBox;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static com.github.ukase.toolkit.xlsx.XlsxUtil.*;
+import static com.github.ukase.toolkit.xlsx.XlsxUtil.greaterInt;
+import static com.github.ukase.toolkit.xlsx.XlsxUtil.intValue;
 
 public class RenderingTable implements Runnable {
     private static final int CALCULATED_KOEF = 36;
@@ -116,25 +110,25 @@ public class RenderingTable implements Runnable {
     }
 
     private void processCell(Row row, Element td, TableRowBox rowBox) {
-        TableCellBox cellBox = (TableCellBox)getBlockBoxFor(td, rowBox);
+        TableCellBox cellBox = (TableCellBox) getBlockBoxFor(td, rowBox);
         String type = td.getAttributeNS(NAMESPACE_XLSX, ATTR_DATA_TYPE);
-        CellType cellType = CellType.fromString(type);
-        CellStyle style = prepareCellStyle(cellBox.getStyle(), getFormat(cellType));
+        CellTypeEnum cellTypeEnum = CellTypeEnum.fromString(type);
+        CellStyle style = prepareCellStyle(cellBox.getStyle(), getFormat(cellTypeEnum));
 
         mergedCells.stream()
                 .filter(merge -> merge.isApplicable(row))
                 .forEach(merge -> merge.fillRow(row));
 
         int cellNumber = row.getPhysicalNumberOfCells();
-        Cell cell = createCell(cellType, row, td, cellNumber);
+        Cell cell = createCell(cellTypeEnum, row, td, cellNumber);
         cell.setCellStyle(style);
 
         mergeCells(row, td, cellNumber, style);
         calculateColumnWidth(cellNumber, cellBox.getStyle());
     }
 
-    private Cell createCell(CellType type, Row row, Element td, int cellNumber) {
-        Cell cell = row.createCell(cellNumber, type.getXssfType());
+    private Cell createCell(CellTypeEnum type, Row row, Element td, int cellNumber) {
+        Cell cell = row.createCell(cellNumber, type.getCellType());
         String textContent = td.getTextContent().trim();
 
         switch (type) {
@@ -155,12 +149,11 @@ public class RenderingTable implements Runnable {
             double numberValue = Double.parseDouble(textContent);
             cell.setCellValue(numberValue);
         } catch (NumberFormatException e) {
-            cell.setCellType(CellType.DEFAULT.getXssfType());
             cell.setCellValue(textContent);
         }
     }
 
-    private short getFormat(CellType type) {
+    private short getFormat(CellTypeEnum type) {
         switch (type) {
             case NUMERIC:
                 return numberFormat;
@@ -195,7 +188,7 @@ public class RenderingTable implements Runnable {
     }
 
     private XSSFCellStyle getNewStyle(CellStyleKey key) {
-        XSSFCellStyle style = (XSSFCellStyle)wb.createCellStyle();
+        XSSFCellStyle style = (XSSFCellStyle) wb.createCellStyle();
         key.applyToStyle(style, wb::createFont);
         return style;
     }
@@ -213,7 +206,7 @@ public class RenderingTable implements Runnable {
 
     private BlockBox getBlockBoxFor(Element element, BlockBox source) {
         List boxes = source.getElementBoxes(element);
-        for (Object box: boxes) {
+        for (Object box : boxes) {
             if (box instanceof BlockBox) {
                 return (BlockBox) box;
             }

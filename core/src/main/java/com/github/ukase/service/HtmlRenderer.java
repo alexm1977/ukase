@@ -19,9 +19,7 @@
 
 package com.github.ukase.service;
 
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.HandlebarsException;
-import com.github.jknack.handlebars.Template;
+import com.github.jknack.handlebars.*;
 import com.github.ukase.toolkit.render.RenderException;
 import com.github.ukase.web.UkasePayload;
 import lombok.extern.log4j.Log4j;
@@ -49,7 +47,7 @@ public class HtmlRenderer implements Renderer<UkasePayload, String> {
             String html = template.apply(data.getData());
             log.debug("Html rendered with size:" + html.length());
             return html;
-        } catch (IOException|HandlebarsException|NullPointerException e) {
+        } catch (IOException | HandlebarsException | NullPointerException e) {
             throw new RenderException("Cannot produce html", e, "html");
         }
     }

@@ -25,5 +25,6 @@ public interface UkaseTemplateLoader {
     int ORDER_JAR = 2;
 
     boolean hasTemplate(String name);
+
     int order();
 }
