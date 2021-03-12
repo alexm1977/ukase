@@ -27,7 +27,7 @@
     <parent>
         <groupId>com.github.ukase</groupId>
         <artifactId>ukase-parent</artifactId>
-        <version>7.0</version>
+        <version>8.0</version>
     </parent>
 
     <properties>
@@ -35,27 +35,6 @@
     </properties>
 
     <profiles>
-        <profile>
-            <id>ui</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.github.ukase</groupId>
-                    <artifactId>ukase-ui</artifactId>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>3.3.1</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
         <profile>
             <id>docker</id>
             <activation>
@@ -116,7 +95,7 @@
         <dependency>
             <groupId>com.github.ukase</groupId>
             <artifactId>render</artifactId>
-            <version>7.0</version>
+            <version>8.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
