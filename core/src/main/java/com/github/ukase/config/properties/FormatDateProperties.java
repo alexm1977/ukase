@@ -19,12 +19,13 @@
 
 package com.github.ukase.config.properties;
 
+import com.github.ukase.toolkit.helpers.datetime.IFormatDateProperties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "ukase.helpers.format-date")
 @Data
-public class FormatDateProperties {
+public class FormatDateProperties implements IFormatDateProperties {
     private String parseFormat;
     private String datePattern;
     private boolean disablePatterns;

@@ -19,7 +19,7 @@
 
 package com.github.ukase.service;
 
-import com.github.ukase.web.UkasePayload;
+import com.github.ukase.model.UkasePayload;
 import org.junit.Ignore;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;

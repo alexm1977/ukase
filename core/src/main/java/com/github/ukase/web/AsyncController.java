@@ -22,6 +22,7 @@ package com.github.ukase.web;
 import com.github.ukase.async.AsyncManager;
 import com.github.ukase.async.AsyncStatus;
 import com.github.ukase.config.BulkConfig;
+import com.github.ukase.model.UkasePayload;
 import com.github.ukase.toolkit.StaticUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -19,31 +19,26 @@
 
 package com.github.ukase.web;
 
-import com.github.ukase.TestHelper;
-import com.github.ukase.UkaseApplication;
+import com.github.ukase.*;
 import com.github.ukase.async.AsyncManager;
 import com.github.ukase.config.*;
+import com.github.ukase.model.validation.HtmlTemplateLocationExistsValidator;
 import com.github.ukase.service.*;
 import com.github.ukase.toolkit.*;
-import com.github.ukase.toolkit.fs.FSTemplateLoader;
-import com.github.ukase.toolkit.fs.FileSource;
+import com.github.ukase.toolkit.fs.*;
 import com.github.ukase.toolkit.helpers.FormatNumberHelper;
 import com.github.ukase.toolkit.helpers.datetime.FormatDateHelper;
-import com.github.ukase.toolkit.jar.JarSource;
-import com.github.ukase.toolkit.jar.ZipTemplateLoader;
+import com.github.ukase.toolkit.jar.*;
 import com.github.ukase.toolkit.render.RenderTaskBuilder;
 import com.github.ukase.toolkit.xlsx.RenderingTableFactory;
 import com.github.ukase.toolkit.xlsx.translators.*;
-import com.github.ukase.web.validation.HtmlTemplateLocationExistsValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -53,38 +48,37 @@ import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
-@ContextConfiguration(classes = {
-        UkaseApplication.class,
-        UkaseSettings.class,
-        WaterMarkSettings.class,
-        BulkConfig.class,
-        AsyncManager.class,
-        HtmlRenderer.class,
-        PdfRenderer.class,
-        PdfWatermarkRenderer.class,
-        XlsxRenderer.class,
-        FileSource.class,
-        FormatDateHelper.class,
-        FormatNumberHelper.class,
-        JarSource.class,
-        CompoundSource.class,
-        CompoundTemplateLoader.class,
-        RenderTaskBuilder.class,
-        ResourceProvider.class,
-        HtmlTemplateLocationExistsValidator.class,
-        RenderingTableFactory.class,
-        BackgroundColorTranslator.class,
-        BorderBottomTranslator.class,
-        BorderLeftTranslator.class,
-        BorderRightTranslator.class,
-        BorderTopTranslator.class,
-        FontSizeTranslator.class,
-        FontWeightTranslator.class,
-        HorizontalAlignmentTranslator.class,
-        VerticalAlignmentTranslator.class,
-        WordWrapTranslator.class,
-        ZipTemplateLoader.class,
-        FSTemplateLoader.class,
+@ContextConfiguration(classes = {UkaseApplication.class,
+                                 UkaseSettings.class,
+                                 WaterMarkSettings.class,
+                                 BulkConfig.class,
+                                 AsyncManager.class,
+                                 HtmlRenderer.class,
+                                 PdfRenderer.class,
+                                 PdfWatermarkRenderer.class,
+                                 XlsxRenderer.class,
+                                 FileSource.class,
+                                 FormatDateHelper.class,
+                                 FormatNumberHelper.class,
+                                 JarSource.class,
+                                 CompoundSource.class,
+                                 CompoundTemplateLoader.class,
+                                 RenderTaskBuilder.class,
+                                 ResourceProvider.class,
+                                 HtmlTemplateLocationExistsValidator.class,
+                                 RenderingTableFactory.class,
+                                 BackgroundColorTranslator.class,
+                                 BorderBottomTranslator.class,
+                                 BorderLeftTranslator.class,
+                                 BorderRightTranslator.class,
+                                 BorderTopTranslator.class,
+                                 FontSizeTranslator.class,
+                                 FontWeightTranslator.class,
+                                 HorizontalAlignmentTranslator.class,
+                                 VerticalAlignmentTranslator.class,
+                                 WordWrapTranslator.class,
+                                 ZipTemplateLoader.class,
+                                 FSTemplateLoader.class,
 })
 @WebMvcTest(controllers = {UkaseController.class, UkaseExceptionHandler.class})
 public class UkaseControllerTest {
@@ -106,8 +100,8 @@ public class UkaseControllerTest {
         String basicHtml = getFileContent("basic.html");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/html").content(payload).contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().xml(basicHtml));
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(MockMvcResultMatchers.content().xml(basicHtml));
     }
 
     @Test
@@ -116,8 +110,8 @@ public class UkaseControllerTest {
         String wrongAnswer = getFileContent("wrong-template.answer.json");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/html").content(wrongPayload).contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.content().json(wrongAnswer));
+               .andExpect(MockMvcResultMatchers.status().isBadRequest())
+               .andExpect(MockMvcResultMatchers.content().json(wrongAnswer));
     }
 
     @Test
@@ -125,14 +119,14 @@ public class UkaseControllerTest {
         String brokenPayload = getFileContent("broken-payload.json");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/html").content(brokenPayload).contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.status().isInternalServerError());
+               .andExpect(MockMvcResultMatchers.status().isInternalServerError());
     }
 
     @Test
     public void testGeneratePdf() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/pdf").content(payload).contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(this::checkPdf);
+               .andExpect(MockMvcResultMatchers.status().isOk())
+               .andExpect(this::checkPdf);
     }
 
     private void checkPdf(MvcResult result) {

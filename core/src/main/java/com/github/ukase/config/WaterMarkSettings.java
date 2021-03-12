@@ -19,6 +19,7 @@
 
 package com.github.ukase.config;
 
+import com.github.ukase.service.IWaterMarkSettings;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "ukase.water-mark")
-public class WaterMarkSettings {
+public class WaterMarkSettings implements IWaterMarkSettings {
     private float size;
     private float x;
     private float y;

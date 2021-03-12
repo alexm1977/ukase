@@ -2,7 +2,7 @@ package com.github.ukase.toolkit.helpers;
 
 import com.github.ukase.service.HtmlRenderer;
 import com.github.ukase.toolkit.upload.UploadedTemplateLoader;
-import com.github.ukase.web.UkasePayload;
+import com.github.ukase.model.UkasePayload;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;

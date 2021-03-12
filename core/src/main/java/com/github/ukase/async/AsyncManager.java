@@ -21,7 +21,7 @@ package com.github.ukase.async;
 
 import com.github.ukase.toolkit.render.RenderTask;
 import com.github.ukase.toolkit.render.RenderTaskBuilder;
-import com.github.ukase.web.UkasePayload;
+import com.github.ukase.model.UkasePayload;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -19,6 +19,8 @@
 
 package com.github.ukase.config;
 
+import com.github.ukase.toolkit.fs.*;
+import com.github.ukase.toolkit.jar.IJarSettings;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -29,7 +31,7 @@ import java.net.*;
 @Component
 @Data
 @ConfigurationProperties(prefix = "ukase")
-public class UkaseSettings {
+public class UkaseSettings implements IResourceSettings, ITemplateSettings, IJarSettings {
     private static final String CLASSPATH = "classpath:/";
 
     private String projectRoot;

@@ -21,8 +21,7 @@ package com.github.ukase.service;
 
 import com.github.ukase.config.UkaseSettings;
 import com.github.ukase.toolkit.*;
-import com.github.ukase.toolkit.fs.FSTemplateLoader;
-import com.github.ukase.toolkit.fs.FileSource;
+import com.github.ukase.toolkit.fs.*;
 import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;

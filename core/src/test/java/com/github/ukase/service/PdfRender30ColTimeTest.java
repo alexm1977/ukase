@@ -19,9 +19,8 @@
 
 package com.github.ukase.service;
 
-import com.github.ukase.web.UkasePayload;
-import org.junit.Ignore;
-import org.junit.Test;
+import com.github.ukase.model.UkasePayload;
+import org.junit.*;
 
 @Ignore("For manual start only")
 public class PdfRender30ColTimeTest extends AbstractNoSpringBenchmark {

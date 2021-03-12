@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class BrokenHelper extends AbstractHelper<Object> {
+public class BrokenHelper extends AbstractHandlebarsHelper<Object> {
     public BrokenHelper() {
         super("broken");
     }
