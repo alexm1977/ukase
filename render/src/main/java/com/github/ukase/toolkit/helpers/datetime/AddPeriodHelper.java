@@ -2,8 +2,8 @@ package com.github.ukase.toolkit.helpers.datetime;
 
 import com.github.jknack.handlebars.Options;
 import com.github.ukase.toolkit.helpers.AbstractHandlebarsHelper;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -15,12 +15,12 @@ import java.util.function.BiFunction;
 /**
  * Add specified date period @{@link PeriodType} to the specified date
  */
-@Slf4j
 @Component
 public class AddPeriodHelper extends AbstractHandlebarsHelper<Object> {
     private static final String CHANGE_DATETIME = "add_period";
 
     private static final Map<PeriodType, BiFunction<OffsetDateTime, Long, OffsetDateTime>> operations = new HashMap<>();
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(AddPeriodHelper.class);
 
     static {
         operations.put(PeriodType.year, OffsetDateTime::plusYears);

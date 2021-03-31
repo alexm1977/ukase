@@ -20,13 +20,15 @@
 package com.github.ukase.toolkit.helpers;
 
 import com.github.jknack.handlebars.Helper;
-import lombok.Getter;
 
 public abstract class AbstractHandlebarsHelper<T> implements Helper<T> {
-    @Getter
     private final String name;
 
     public AbstractHandlebarsHelper(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

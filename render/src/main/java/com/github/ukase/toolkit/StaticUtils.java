@@ -19,14 +19,15 @@
 
 package com.github.ukase.toolkit;
 
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-@Log4j
 public class StaticUtils {
+    private static final Logger log = Logger.getLogger(StaticUtils.class);
+
     public static String readStringFile(InputStream inputStream) {
         if (inputStream == null) {
             return null;

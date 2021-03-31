@@ -21,12 +21,10 @@ package com.github.ukase.toolkit.render;
 
 import com.github.ukase.model.UkasePayload;
 import com.github.ukase.service.Renderer;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
-@Slf4j
-@Data
 class PdfRenderTask implements RenderTask {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(PdfRenderTask.class);
     private final UkasePayload payload;
     private final Renderer<UkasePayload, String> htmlRenderer;
     private final Renderer<String, byte[]> pdfRenderer;
@@ -64,5 +62,66 @@ class PdfRenderTask implements RenderTask {
     @Override
     public String getTemplateName() {
         return payload.getIndex();
+    }
+
+    public UkasePayload getPayload() {
+        return this.payload;
+    }
+
+    public Renderer<UkasePayload, String> getHtmlRenderer() {
+        return this.htmlRenderer;
+    }
+
+    public Renderer<String, byte[]> getPdfRenderer() {
+        return this.pdfRenderer;
+    }
+
+    public Renderer<byte[], byte[]> getWatermarkRenderer() {
+        return this.watermarkRenderer;
+    }
+
+    public boolean equals(final Object o) {
+        if (o == this) return true;
+        if (!(o instanceof PdfRenderTask)) return false;
+        final PdfRenderTask other = (PdfRenderTask) o;
+        if (!other.canEqual((Object) this)) return false;
+        final Object this$payload = this.getPayload();
+        final Object other$payload = other.getPayload();
+        if (this$payload == null ? other$payload != null : !this$payload.equals(other$payload)) return false;
+        final Object this$htmlRenderer = this.getHtmlRenderer();
+        final Object other$htmlRenderer = other.getHtmlRenderer();
+        if (this$htmlRenderer == null ? other$htmlRenderer != null : !this$htmlRenderer.equals(other$htmlRenderer))
+            return false;
+        final Object this$pdfRenderer = this.getPdfRenderer();
+        final Object other$pdfRenderer = other.getPdfRenderer();
+        if (this$pdfRenderer == null ? other$pdfRenderer != null : !this$pdfRenderer.equals(other$pdfRenderer))
+            return false;
+        final Object this$watermarkRenderer = this.getWatermarkRenderer();
+        final Object other$watermarkRenderer = other.getWatermarkRenderer();
+        if (this$watermarkRenderer == null ? other$watermarkRenderer != null : !this$watermarkRenderer.equals(other$watermarkRenderer))
+            return false;
+        return true;
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof PdfRenderTask;
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $payload = this.getPayload();
+        result = result * PRIME + ($payload == null ? 43 : $payload.hashCode());
+        final Object $htmlRenderer = this.getHtmlRenderer();
+        result = result * PRIME + ($htmlRenderer == null ? 43 : $htmlRenderer.hashCode());
+        final Object $pdfRenderer = this.getPdfRenderer();
+        result = result * PRIME + ($pdfRenderer == null ? 43 : $pdfRenderer.hashCode());
+        final Object $watermarkRenderer = this.getWatermarkRenderer();
+        result = result * PRIME + ($watermarkRenderer == null ? 43 : $watermarkRenderer.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "PdfRenderTask(payload=" + this.getPayload() + ", htmlRenderer=" + this.getHtmlRenderer() + ", pdfRenderer=" + this.getPdfRenderer() + ", watermarkRenderer=" + this.getWatermarkRenderer() + ")";
     }
 }

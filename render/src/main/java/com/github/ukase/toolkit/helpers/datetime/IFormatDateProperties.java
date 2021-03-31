@@ -19,9 +19,6 @@
 
 package com.github.ukase.toolkit.helpers.datetime;
 
-import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 public interface IFormatDateProperties {
     String getParseFormat();
     String getDatePattern();

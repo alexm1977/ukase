@@ -19,17 +19,14 @@
 
 package com.github.ukase.toolkit.upload;
 
-import com.github.jknack.handlebars.io.AbstractTemplateLoader;
-import com.github.jknack.handlebars.io.TemplateSource;
+import com.github.jknack.handlebars.io.*;
 import com.github.ukase.toolkit.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.*;
+import java.util.concurrent.*;
 
 @Component
 @ConditionalOnProperty(name = {"ukase.enabled-sources.upload"}, havingValue = "true")

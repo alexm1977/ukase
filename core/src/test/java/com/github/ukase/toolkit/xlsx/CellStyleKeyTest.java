@@ -26,23 +26,6 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 
 public class CellStyleKeyTest extends MockedTests {
-    @Test
-    public void failOnSetNullBorder() {
-        CellStyleKey cellStyleKey = new CellStyleKey();
-
-        trySetNull(cellStyleKey::setBorderTop);
-        trySetNull(cellStyleKey::setBorderBottom);
-        trySetNull(cellStyleKey::setBorderLeft);
-        trySetNull(cellStyleKey::setBorderRight);
-    }
-
-    @Test
-    public void failOnSetNullAlignment() {
-        CellStyleKey cellStyleKey = new CellStyleKey();
-
-        trySetNull(cellStyleKey::setHorizontalAlignment);
-        trySetNull(cellStyleKey::setVerticalAlignment);
-    }
 
     @Test
     public void testApplyToStyleBorders1() throws Exception {

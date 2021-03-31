@@ -20,14 +20,9 @@
 package com.github.ukase.toolkit.render;
 
 import com.github.ukase.model.UkasePayload;
-import lombok.Getter;
-import lombok.Setter;
 
 public class RenderException extends RuntimeException {
-    @Getter
-    @Setter
     private UkasePayload payload;
-    @Getter
     private final String renderStep;
 
     public RenderException(String message, Throwable cause, String renderStep) {
@@ -38,5 +33,17 @@ public class RenderException extends RuntimeException {
     public RenderException(String message, String renderStep) {
         super(message);
         this.renderStep = renderStep;
+    }
+
+    public UkasePayload getPayload() {
+        return this.payload;
+    }
+
+    public String getRenderStep() {
+        return this.renderStep;
+    }
+
+    public void setPayload(UkasePayload payload) {
+        this.payload = payload;
     }
 }

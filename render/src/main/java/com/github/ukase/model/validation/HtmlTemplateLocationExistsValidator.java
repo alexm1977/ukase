@@ -20,16 +20,18 @@
 package com.github.ukase.model.validation;
 
 import com.github.ukase.toolkit.UkaseTemplateLoader;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.validation.*;
 import java.util.Collection;
 
 @Component
-@AllArgsConstructor
 public class HtmlTemplateLocationExistsValidator implements ConstraintValidator<HtmlTemplateLocationExists, String> {
     private final Collection<UkaseTemplateLoader> templateLoaders;
+
+    public HtmlTemplateLocationExistsValidator(Collection<UkaseTemplateLoader> templateLoaders) {
+        this.templateLoaders = templateLoaders;
+    }
 
     @Override
     public void initialize(HtmlTemplateLocationExists constraintAnnotation) {

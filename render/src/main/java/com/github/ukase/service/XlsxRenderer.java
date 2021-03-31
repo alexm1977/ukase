@@ -22,7 +22,7 @@ package com.github.ukase.service;
 import com.github.ukase.toolkit.ResourceProvider;
 import com.github.ukase.toolkit.render.RenderException;
 import com.github.ukase.toolkit.xlsx.*;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +31,12 @@ import org.w3c.dom.Document;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xhtmlrenderer.render.BlockBox;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 @Service
-@Log4j
 public class XlsxRenderer implements Renderer<String, byte[]> {
     private static final String TAG_TABLE = "table";
+    private static final Logger log = Logger.getLogger(XlsxRenderer.class);
 
     private final ResourceProvider provider;
     private final RenderingTableFactory factory;

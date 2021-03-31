@@ -22,17 +22,14 @@ package com.github.ukase.toolkit.xlsx;
 import com.github.ukase.toolkit.xlsx.translators.Translator;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xhtmlrenderer.css.constants.CSSName;
 import org.xhtmlrenderer.css.style.CalculatedStyle;
-import org.xhtmlrenderer.newtable.TableCellBox;
-import org.xhtmlrenderer.newtable.TableRowBox;
+import org.xhtmlrenderer.newtable.*;
 import org.xhtmlrenderer.render.BlockBox;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.*;
 
 public class RenderingTable implements Runnable {
     private static final int CALCULATED_KOEF = 36;

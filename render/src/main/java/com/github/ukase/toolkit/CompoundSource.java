@@ -21,18 +21,15 @@ package com.github.ukase.toolkit;
 
 import com.github.jknack.handlebars.Helper;
 import com.github.ukase.toolkit.jar.JarSource;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 @Service
 public class CompoundSource {
-    @Getter
     private final Collection<String> fontsUrls;
     private final JarSource jarSource;
     private final List<Source> sources;
@@ -107,6 +104,10 @@ public class CompoundSource {
     private boolean isRegularFont(String fontName) {
         String name = fontName.toLowerCase();
         return !(name.contains("bold") || name.contains("italic"));
+    }
+
+    public Collection<String> getFontsUrls() {
+        return this.fontsUrls;
     }
 
     private static class SourceComparator implements Comparator<Source> {

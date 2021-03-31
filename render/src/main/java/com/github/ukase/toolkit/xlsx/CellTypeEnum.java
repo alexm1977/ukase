@@ -19,12 +19,8 @@
 
 package com.github.ukase.toolkit.xlsx;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.apache.poi.ss.usermodel.CellType;
 
-@Getter
-@AllArgsConstructor
 public enum CellTypeEnum {
     STRING("string", CellType.STRING),
     NUMERIC("numeric", CellType.NUMERIC),
@@ -33,6 +29,11 @@ public enum CellTypeEnum {
 
     private final String stringValue;
     private final CellType cellType;
+
+    private CellTypeEnum(String stringValue, CellType cellType) {
+        this.stringValue = stringValue;
+        this.cellType = cellType;
+    }
 
     public static CellTypeEnum fromString(String type) {
         if (type == null || type.isEmpty()) {
@@ -44,5 +45,13 @@ public enum CellTypeEnum {
             }
         }
         return DEFAULT;
+    }
+
+    public String getStringValue() {
+        return this.stringValue;
+    }
+
+    public CellType getCellType() {
+        return this.cellType;
     }
 }

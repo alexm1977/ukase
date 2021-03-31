@@ -22,15 +22,15 @@ package com.github.ukase.service;
 import com.github.jknack.handlebars.*;
 import com.github.ukase.model.UkasePayload;
 import com.github.ukase.toolkit.render.RenderException;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
-@Log4j
 public class HtmlRenderer implements Renderer<UkasePayload, String> {
+    private static final Logger log = Logger.getLogger(HtmlRenderer.class);
     private Handlebars handlebars;
 
     @Autowired

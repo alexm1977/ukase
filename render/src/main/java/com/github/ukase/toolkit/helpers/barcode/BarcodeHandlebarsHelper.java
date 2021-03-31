@@ -24,24 +24,22 @@ import com.github.ukase.toolkit.helpers.AbstractHandlebarsHelper;
 import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.datamatrix.DataMatrixWriter;
-import com.google.zxing.oned.Code128Writer;
-import com.google.zxing.oned.ITFWriter;
+import com.google.zxing.oned.*;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import static com.github.ukase.toolkit.helpers.barcode.BarcodeCommons.bitMatrixToImage;
-import static com.github.ukase.toolkit.helpers.barcode.BarcodeCommons.convertData;
+import static com.github.ukase.toolkit.helpers.barcode.BarcodeCommons.*;
 
 @Component
-@Slf4j
 public class BarcodeHandlebarsHelper extends AbstractHandlebarsHelper<Object> {
     private static final Map<BarcodeFormat, Writer> WRITERS = new EnumMap<>(BarcodeFormat.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BarcodeHandlebarsHelper.class);
 
     static {
         WRITERS.put(BarcodeFormat.ITF, new ITFWriter());

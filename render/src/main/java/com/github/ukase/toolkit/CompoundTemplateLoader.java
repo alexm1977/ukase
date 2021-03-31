@@ -20,23 +20,21 @@
 package com.github.ukase.toolkit;
 
 import com.github.jknack.handlebars.io.*;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Component
 public class CompoundTemplateLoader extends AbstractTemplateLoader {
     private static final String IMAGE_AS_PAGE = "default - image as page";
     private static final TemplateSource IMAGE_AS_PAGE_TEMPLATE;
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(CompoundTemplateLoader.class);
 
     static {
-        IMAGE_AS_PAGE_TEMPLATE =
-                new StringTemplateSource(IMAGE_AS_PAGE, StaticUtils.readStringFile(getStream()));
+        IMAGE_AS_PAGE_TEMPLATE = new StringTemplateSource(IMAGE_AS_PAGE, StaticUtils.readStringFile(getStream()));
     }
 
     private static InputStream getStream() {
@@ -74,9 +72,9 @@ public class CompoundTemplateLoader extends AbstractTemplateLoader {
         sortedLoaders.sort(new LoaderComparator());
 
         return sortedLoaders.stream()
-                .filter(TemplateLoader.class::isInstance)
-                .map(TemplateLoader.class::cast)
-                .collect(Collectors.toList());
+                            .filter(TemplateLoader.class::isInstance)
+                            .map(TemplateLoader.class::cast)
+                            .collect(Collectors.toList());
     }
 
     private static class LoaderComparator implements Comparator<UkaseTemplateLoader> {

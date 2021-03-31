@@ -20,7 +20,7 @@
 package com.github.ukase.toolkit.helpers.barcode;
 
 import com.google.zxing.common.BitMatrix;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -30,10 +30,10 @@ import java.nio.*;
 import java.nio.charset.*;
 import java.util.Base64;
 
-@Slf4j
 class BarcodeCommons {
     private static final String FILE_TYPE = "png";
     private static final String IMAGE_SRC_PREFIX = "data:image/png;base64,";
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BarcodeCommons.class);
 
     static String bitMatrixToImage(BitMatrix matrix) throws IOException {
         BufferedImage image = renderImage(matrix, matrix.getWidth(), matrix.getHeight());

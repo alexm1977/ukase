@@ -26,7 +26,7 @@ import com.github.ukase.toolkit.pdf.*;
 import com.github.ukase.toolkit.render.RenderException;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.BaseFont;
-import lombok.extern.log4j.Log4j;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +40,6 @@ import java.io.*;
 import java.util.regex.Pattern;
 
 @Service
-@Log4j
 public class ResourceProvider {
     private static final String COMMON_DOCTYPE = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" " +
             "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
@@ -53,6 +52,7 @@ public class ResourceProvider {
     private static final String ENTITY_QUOTE = "&#x27;";
     private static final String SYMBOL_QUOTE = "'";
     private static final String SYMBOL_EQUAL = "=";
+    private static final Logger log = Logger.getLogger(ResourceProvider.class);
 
     private final ApplicationContext context;
     private final CompoundSource source;

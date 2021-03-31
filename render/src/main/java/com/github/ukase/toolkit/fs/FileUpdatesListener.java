@@ -20,7 +20,7 @@
 package com.github.ukase.toolkit.fs;
 
 import com.github.ukase.toolkit.TemplateListener;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import java.io.*;
 import java.nio.file.*;
@@ -30,8 +30,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static java.nio.file.StandardWatchEventKinds.*;
 
-@Slf4j
 class FileUpdatesListener {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(FileUpdatesListener.class);
     private final Map<WatchKey, Path> keys;
     private final WatchService watcher;
     private final FileVisitor visitor;

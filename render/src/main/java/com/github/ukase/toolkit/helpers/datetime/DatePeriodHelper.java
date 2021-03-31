@@ -1,9 +1,9 @@
 package com.github.ukase.toolkit.helpers.datetime;
 
 import com.github.jknack.handlebars.Options;
-import com.github.ukase.toolkit.helpers.*;
-import lombok.extern.slf4j.Slf4j;
+import com.github.ukase.toolkit.helpers.AbstractHandlebarsHelper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
 import java.time.*;
@@ -13,10 +13,10 @@ import java.time.temporal.ChronoUnit;
  * Evaluate period between two dates.
  * Dates without value (null) will be replaced with current time
  */
-@Slf4j
 @Component
 public class DatePeriodHelper extends AbstractHandlebarsHelper<Object> {
     private static final String DATETIME_PERIOD = "datetime_period";
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(DatePeriodHelper.class);
 
     public DatePeriodHelper() {
         super(DATETIME_PERIOD);
