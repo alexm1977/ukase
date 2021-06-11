@@ -56,7 +56,10 @@ public class CompoundTemplateLoader extends AbstractTemplateLoader {
 
         for (TemplateLoader loader : templateLoaders) {
             try {
-                return loader.sourceAt(location);
+                var templateSource = loader.sourceAt(location);
+                if (templateSource != null) {
+                    return loader.sourceAt(location);
+                }
             } catch (IOException e) {
                 //ignore
             }
